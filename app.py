@@ -7,10 +7,13 @@ from reader import Reader, Device
 
 reader = Reader('config.json')
 rooms = reader.rooms
-broker = reader.broker
+devices = reader.all_devices
+
 
 app = Flask(__name__)
-app.config['MQTT_BROKER_URL'] = broker
+app.config['MQTT_BROKER_URL'] = reader.broker
+app.config['MQTT_USERNAME'] = reader.user
+app.config['MQTT_PASSWORD'] = reader.password
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 mqtt = Mqtt(app)
@@ -30,7 +33,7 @@ def handle_mqtt_message(client, userdata, message):
     """
     Logs all messages from subscribed topics to console.
     """
-    print(dict(
+    print("[INCOMING MESSAGE]", dict(
         topic=message.topic,
         payload=message.payload.decode()
     ))
@@ -46,15 +49,12 @@ def show_topic(topic):
     return render_template('layout.html', rooms=rooms, topic=topic)
 
 
-@app.route('/toggle_device', methods=["GET", "POST"])
-def toggle_device():
-    if request.method == 'POST':
-        print(request.base_url)
-        turned_on = request.form.getlist('on')
-        print(turned_on)
-        return redirect(request.url)
-    return render_template('layout.html', rooms=rooms)
-    # reader.all_devices[device_topic].toggle()
+@app.route('/switch/<path:topic>')
+def switch(topic):
+    device = devices[topic]
+    device.toggle()
+    mqtt.publish(topic, f"{'ON' if device.on else 'OFF'}")
+    return render_template('layout.html', rooms=rooms, topic=device.parent_topic)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 {
   "broker": "localhost",
-  "user": "user",
-  "password": "123",
+  "user": "",
+  "password": "",
   "rooms":
           [
             {"topic": "home/kitchen",

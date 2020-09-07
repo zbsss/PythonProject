@@ -30,7 +30,7 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/login">Login</a>
+{#              <a class="nav-item nav-link" href="/login">Login</a>#}
             </div>
           </div>
         </div>
@@ -43,13 +43,12 @@
         <div class="col-md-8">
             {% if topic %}
                     <h3>Devices</h3>
-                    <form action="/toggle_device" method="POST">
                     <table class="table table-hover">
                         <thead>
                           <tr>
                             <th>Name</th>
                             <th>Topic</th>
-                            <th>Action</th>
+                            <th>State</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -59,17 +58,15 @@
                                     <td> {{ device.topic}}</td>
                                     <td>
                                         {% if device.on %}
-                                            <input name="on" value="{{ device.topic }}" type="checkbox" checked data-toggle="toggle" data-size="medium"/>
+                                            <a  href="/switch/{{ device.topic }}" class="btn btn-success" role="button">ON</a>
                                         {% else %}
-                                            <input name="on" value="{{ device.topic }}" type="checkbox" data-toggle="toggle" data-size="medium"/>
+                                            <a href="/switch/{{ device.topic }}" class="btn btn-danger" role="button">OFF</a>
                                         {% endif %}
                                     </td>
                                   </tr>
                                 {% endfor %}
                         </tbody>
-                        <input type="submit">
                       </table>
-                    </form>
             {% endif %}
         </div>
         <div class="col-md-4">
