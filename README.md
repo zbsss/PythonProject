@@ -23,4 +23,5 @@ Wszystkie pokoje i znajdujące się w nich urządzenia są ładowane dynamicznie
 
 
 ## Przykład działania
+https://www.youtube.com/watch?v=sbqJMt58sss&ab_channel=ZBsiu
 ![](preview.jpg)
