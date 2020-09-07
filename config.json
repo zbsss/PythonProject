@@ -1,0 +1,14 @@
+{
+  "broker": "localhost",
+  "user": "user",
+  "password": "123",
+  "rooms":
+          [
+            {"topic": "home/kitchen",
+              "devices": ["light", "TV"]
+            },
+            {"topic": "home/bedroom",
+              "devices": ["speakers", "light"]
+            }
+          ]
+}
