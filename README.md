@@ -11,6 +11,16 @@
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 3. Należy uruchomić powyższy link w przeglądarce
+4. Po włączeniu/wyłączeniu dowolnego użądzenia powinno się pokazać w konsoli coś w rodzaju:
+```
+[INCOMING MESSAGE] {'topic': 'home/bedroom/light', 'payload': 'OFF'}
+```
+Co oznacza że operacja dotarła do serwera MQTT i wróciła do nas bo subskrybujemy topic.
+
+## Informacje
+Project jest wykonany w oparciu o bibliotekę Flask oraz Flask-MQTT.   
+Wszystkie pokoje i znajdujące się w nich użądzenia są ładowane dynamicznie na stronę z pliku config.json
+
 
 ## Przykład działania
 ![](preview.jpg)
