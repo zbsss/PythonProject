@@ -23,6 +23,5 @@ Wszystkie pokoje i znajdujące się w nich urządzenia są ładowane dynamicznie
 
 
 ## Przykład działania
-Link do filmiku
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/sbqJMt58sss/0.jpg)](https://www.youtube.com/watch?v=sbqJMt58sss&ab_channel=ZBsiu "Pilot MQTT Python")
 
