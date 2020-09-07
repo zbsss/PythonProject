@@ -19,7 +19,7 @@ Co oznacza że operacja dotarła do serwera MQTT i wróciła do nas bo subskrybu
 
 ## Informacje
 Project jest wykonany w oparciu o bibliotekę Flask oraz Flask-MQTT.   
-Wszystkie pokoje i znajdujące się w nich użądzenia są ładowane dynamicznie na stronę z pliku config.json
+Wszystkie pokoje i znajdujące się w nich urządzenia są ładowane dynamicznie na stronę z pliku config.json
 
 
 ## Przykład działania
