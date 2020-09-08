@@ -33,10 +33,17 @@ def handle_mqtt_message(client, userdata, message):
     """
     Logs all messages from subscribed topics to console.
     """
+    topic = message.topic,
+    payload = message.payload.decode()
+    
     print("[INCOMING MESSAGE]", dict(
-        topic=message.topic,
-        payload=message.payload.decode()
+        topic=topic,
+        payload=payload
     ))
+    
+    # Change device state when receiving message from server
+    if topic in devices and payload in ['ON', 'OFF']:
+        devices[topic].on = payload == 'ON'
 
 
 @app.route('/')
