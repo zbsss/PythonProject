@@ -33,17 +33,19 @@ def handle_mqtt_message(client, userdata, message):
     """
     Logs all messages from subscribed topics to console.
     """
-    topic = message.topic,
+    topic = message.topic
     payload = message.payload.decode()
     
     print("[INCOMING MESSAGE]", dict(
         topic=topic,
         payload=payload
     ))
-    
+
     # Change device state when receiving message from server
     if topic in devices and payload in ['ON', 'OFF']:
-        devices[topic].on = payload == 'ON'
+        device = devices[topic]
+        device.on = payload == 'ON'
+        return redirect(url_for('show_topic', topic=device.parent_topic))
 
 
 @app.route('/')
@@ -59,9 +61,8 @@ def show_topic(topic):
 @app.route('/switch/<path:topic>')
 def switch(topic):
     device = devices[topic]
-    device.toggle()
-    mqtt.publish(topic, f"{'ON' if device.on else 'OFF'}")
-    return render_template('layout.html', rooms=rooms, topic=device.parent_topic)
+    mqtt.publish(topic, f"{'OFF' if device.on else 'ON'}")
+    return redirect(url_for('show_topic', topic=device.parent_topic))
 
 
 if __name__ == '__main__':
