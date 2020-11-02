@@ -61,7 +61,8 @@ def show_topic(topic):
 @app.route('/switch/<path:topic>')
 def switch(topic):
     device = devices[topic]
-    mqtt.publish(topic, f"{'OFF' if device.on else 'ON'}")
+    # Retain keeps the state on the server and if some new device subscribes it gets the saved state automatically
+    mqtt.publish(topic, f"{'OFF' if device.on else 'ON'}", retain=True)
     return redirect(url_for('show_topic', topic=device.parent_topic))
 
 
